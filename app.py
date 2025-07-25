@@ -1,6 +1,8 @@
-from flask import Flask, request, render_template, redirect , url_for
+from flask import Flask, request, render_template, redirect , url_for,session
 
 app = Flask(__name__)
+
+app.secret_key = "200615"
 
 @app.route('/')
 def home():
@@ -20,7 +22,12 @@ def login():
         mail = request.form.get("email")
         password = request.form.get("password")
 
-        return render_template('profile.html',user = name, number = num, mail = mail)
+        session['user'] = name
+        session['number'] = num
+        session['mail'] = mail
+        session['password'] = password
+
+        return render_template('dashboard.html',user = name)
 
 
     return render_template('login.html')    
@@ -39,6 +46,19 @@ def feedback():
     
     return render_template('feedback.html')
 
+@app.route('/profile',methods=["GET","POST"])
+def profile():
+    
+    if request.method == "POST":
+        password = request.form.get("password")
+        if password == session.get('password'):
+            name = session.get('user')
+            number = session.get('number')
+            mail = session.get('mail')
+            return render_template('profile.html',user = name, number=number,mail=mail)
+        
+    
+    return render_template('password.html')
 
 
 if __name__ == '__main__':
