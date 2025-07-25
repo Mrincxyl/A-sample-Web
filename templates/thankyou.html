@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+<h2>✅ Thank You, {{ user }}!</h2>
+<p>Your message has been received:</p>
+<blockquote>{{ message }}</blockquote>
+<p>We appreciate your feedback.</p>
+<a href="/">Back to Home</a>
+{% endblock %}
