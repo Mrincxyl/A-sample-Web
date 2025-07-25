@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Feedback{% endblock %}
+
+{% block content %}
+<h2>📝 Feedback</h2>
+<p>We'd love to hear your thoughts!</p>
+
+<form method="POST" action="/feedback">
+    <label>Name:</label><br>
+    <input type="text" name="username" required><br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message" rows="5" cols="40" required></textarea><br><br>
+
+    <input type="submit" value="Submit Feedback">
+</form>
+{% endblock %}
